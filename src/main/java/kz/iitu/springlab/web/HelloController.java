@@ -28,7 +28,7 @@ public class HelloController {
 
     @GetMapping("/palindrome")
     public PalindromeResult palindrome(
-            @RequestParam(defaultValue = "") String text) {
+            @RequestParam(name = "text", defaultValue = "") String text) {
 
         String normalized = text
                 .replaceAll("\\s+", "")
@@ -42,6 +42,6 @@ public class HelloController {
     }
 
     public record Greeting(String message, String owner, LocalDateTime timestamp) {}
-    public record PalindromeResult(String text, boolean palindrome) { }
+    public record PalindromeResult(String text, boolean palindrome) {}
     public record Info(String owner, String javaVersion, int cpuCores) {}
 }
