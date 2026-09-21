@@ -1,0 +1,11 @@
+app:
+  mail:
+    retry-count: 5
+    timeout: 2s
+
+server:
+  port: 8081
+
+logging:
+  level:
+    kz.iitu: DEBUG
