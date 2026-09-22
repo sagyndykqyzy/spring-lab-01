@@ -35,14 +35,26 @@ public class ConfigController {
 
         result.put("owner", props.getOwner());
         result.put("group", props.getGroup());
+
         result.put("mailFrom", props.getMail().getFrom());
         result.put("mailRetryCount", props.getMail().getRetryCount());
         result.put("mailTimeout", props.getMail().getTimeout().toString());
         result.put("mailEnabled", props.getMail().isEnabled());
 
+        // Security configuration
+        result.put(
+                "securityTokenTtl",
+                props.getSecurity().getTokenTtl().toString()
+        );
+
+        result.put(
+                "securityMinPasswordLength",
+                props.getSecurity().getMinPasswordLength()
+        );
+
         result.put(
                 "serverPort",
-                environment.getProperty("server.port")
+                environment.getProperty("server.port", "8080")
         );
 
         result.put(
