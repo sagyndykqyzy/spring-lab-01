@@ -1,14 +1,14 @@
+server:
+  port: 8081
+
 app:
   mail:
-    retry-count: 5
-    timeout: 2s
+    enabled: false
+    retry-count: 1
 
   security:
     token-ttl: 10m
     min-password-length: 10
-
-server:
-  port: 8081
 
 logging:
   level:

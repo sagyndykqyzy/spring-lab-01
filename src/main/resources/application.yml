@@ -1,3 +1,10 @@
+spring:
+  application:
+    name: spring-lab
+
+server:
+  port: 8080
+
 app:
   owner: Sagyndyk Albina
   group: IT1-2415
@@ -11,8 +18,13 @@ app:
   security:
     token-ttl: 30m
     min-password-length: 8
+
+logging:
+  level:
+    kz.iitu: INFO
+
 management:
   endpoints:
     web:
       exposure:
-        include: "health,env"
+        include: "health,env,configprops,conditions"

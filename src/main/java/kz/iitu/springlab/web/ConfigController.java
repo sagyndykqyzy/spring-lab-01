@@ -22,7 +22,8 @@ public class ConfigController {
     public ConfigController(
             AppProperties props,
             EnvironmentBanner banner,
-            Environment environment) {
+            Environment environment
+    ) {
         this.props = props;
         this.banner = banner;
         this.environment = environment;
@@ -33,28 +34,27 @@ public class ConfigController {
 
         Map<String, Object> result = new LinkedHashMap<>();
 
-        result.put("owner", props.getOwner());
-        result.put("group", props.getGroup());
+        result.put("owner", props.owner());
+        result.put("group", props.group());
 
-        result.put("mailFrom", props.getMail().getFrom());
-        result.put("mailRetryCount", props.getMail().getRetryCount());
-        result.put("mailTimeout", props.getMail().getTimeout().toString());
-        result.put("mailEnabled", props.getMail().isEnabled());
+        result.put("mailFrom", props.mail().from());
+        result.put("mailRetryCount", props.mail().retryCount());
+        result.put("mailTimeout", props.mail().timeout().toString());
+        result.put("mailEnabled", props.mail().enabled());
 
-        // Security configuration
         result.put(
                 "securityTokenTtl",
-                props.getSecurity().getTokenTtl().toString()
+                props.security().tokenTtl().toString()
         );
 
         result.put(
                 "securityMinPasswordLength",
-                props.getSecurity().getMinPasswordLength()
+                props.security().minPasswordLength()
         );
 
         result.put(
                 "serverPort",
-                environment.getProperty("server.port", "8080")
+                environment.getProperty("server.port")
         );
 
         result.put(
