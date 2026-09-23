@@ -1,0 +1,18 @@
+app:
+  owner: Sagyndyk Albina
+  group: IT1-2415
+
+  mail:
+    from: no-reply@iitu.kz
+    retry-count: 3
+    timeout: 5s
+    enabled: true
+
+  security:
+    token-ttl: 30m
+    min-password-length: 8
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,env"
