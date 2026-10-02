@@ -8,4 +8,4 @@ app:
 
 logging:
   level:
-    kz.iitu: WARN
+    kz.iitu: INFO
