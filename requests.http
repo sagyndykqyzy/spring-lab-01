@@ -57,4 +57,17 @@ GET http://localhost:8080/api/books/by-year/22
 
 ### 400 Bad Request - Invalid limit
 GET http://localhost:8080/api/books?limit=abc
+### Add a book
+POST http://localhost:8080/api/books
+Content-Type: application/json
 
+{
+  "title": "Java Fundamentals",
+  "author": "Test Author",
+  "year": 2024
+}
+### Test 302 Redirect
+POST http://localhost:8080/books
+Content-Type: application/x-www-form-urlencoded
+
+title=Redirect Test Book&author=Test Author&year=2026
