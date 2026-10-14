@@ -1,0 +1,60 @@
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Barbie and the Magic of Reading",
+  "author": "Barbie",
+  "year": 2026
+}
+
+###
+
+PUT http://localhost:8080/api/books/4
+Content-Type: application/json
+
+{
+  "title": "Barbie Dream Library",
+  "author": "Barbie",
+  "year": 2025
+}
+
+###
+
+DELETE http://localhost:8080/api/books/5
+
+###   Test Post/Redirect/Get
+POST http://localhost:8080/books
+Content-Type: application/x-www-form-urlencoded
+
+title=Java Precisely&author=Sestoft&year=2016
+### 400 Bad Request
+GET http://localhost:8080/api/books/by-year/abc
+
+### 404 Not Found
+GET http://localhost:8080/api/books/999
+
+### 405 Method Not Allowed
+PATCH http://localhost:8080/api/books/1
+
+### 406 Not Acceptable
+GET http://localhost:8080/api/books
+Accept: application/xml
+
+### 415 Unsupported Media Type
+POST http://localhost:8080/api/books
+Content-Type: text/plain
+
+hello
+
+### Variant 2 - Valid year
+GET http://localhost:8080/api/books/by-year/2018
+
+### Variant 2 - Invalid year (letters)
+GET http://localhost:8080/api/books/by-year/abc
+
+### Variant 2 - Invalid year (2 digits)
+GET http://localhost:8080/api/books/by-year/22
+
+### 400 Bad Request - Invalid limit
+GET http://localhost:8080/api/books?limit=abc
+

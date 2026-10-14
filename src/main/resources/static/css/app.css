@@ -1,0 +1,177 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background: linear-gradient(135deg, #fff7fa, #fce7f0);
+    color: #633c4c;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 55px auto;
+    padding: 0 25px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.logo {
+    font-size: 44px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #8e3658;
+    font-size: 42px;
+    margin: 0 0 10px;
+}
+
+.subtitle {
+    color: #a7798c;
+    font-size: 15px;
+}
+
+.catalogue-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(160, 70, 110, 0.10);
+}
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px 18px;
+    border: 1px solid #f0cbd9;
+    border-radius: 12px;
+    background: #fffafd;
+    font: inherit;
+    outline: none;
+}
+
+input:focus {
+    border-color: #e58ab0;
+    box-shadow: 0 0 0 3px #fce4ee;
+}
+
+button {
+    padding: 14px 25px;
+    background: #d96b9b;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #b94d7c;
+    transform: translateY(-2px);
+}
+
+.show-all {
+    color: #a74770;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px;
+}
+
+.show-all:hover {
+    text-decoration: underline;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th {
+    background: #963f65;
+    color: white;
+    padding: 17px;
+    text-align: center;
+}
+
+td {
+    padding: 17px;
+    border-bottom: 1px solid #f7e4ec;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background: #fff8fb;
+}
+
+tbody tr:hover {
+    background: #fce6ef;
+}
+
+.flash {
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #fce8f0;
+    color: #923c61;
+    border-radius: 12px;
+    border: 1px solid #f2c6d8;
+}
+
+.empty {
+    text-align: center;
+    color: #a7798c;
+    padding: 25px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #b28a9b;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    .catalogue-card {
+        padding: 18px;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    th, td {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+}
+
