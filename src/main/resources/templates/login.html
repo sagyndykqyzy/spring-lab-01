@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | BookSpace</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="login-page">
+
+<div class="login-card">
+    <div class="login-logo">✦</div>
+
+    <h1>BookSpace</h1>
+    <p class="login-subtitle">
+        Your personal library, beautifully organised.
+    </p>
+
+    <div th:if="${param.error}" class="login-error">
+        Invalid username or password.
+    </div>
+
+    <div th:if="${param.logout}" class="login-success">
+        You have successfully logged out.
+    </div>
+
+    <form th:action="@{/login}" method="post"
+          class="login-form">
+
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}">
+
+        <label for="username">Username</label>
+        <input id="username"
+               type="text"
+               name="username"
+               placeholder="Enter your username"
+               autocomplete="username"
+               required>
+
+        <label for="password">Password</label>
+        <input id="password"
+               type="password"
+               name="password"
+               placeholder="Enter your password"
+               autocomplete="current-password"
+               required>
+
+        <button type="submit" class="btn btn-primary login-btn">
+            Sign In
+        </button>
+    </form>
+
+    <p class="login-footer">
+        A little space for every story ♡
+    </p>
+</div>
+
+</body>
+</html>

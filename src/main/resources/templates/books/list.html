@@ -1,61 +1,131 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${title}">Catalogue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Catalogue | BookSpace</title>
   <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body>
 
-<h1 th:text="${title}">Catalogue</h1>
+<div class="page-container">
 
-<p th:if="${message}"
-   class="flash"
-   th:text="${message}"></p>
+  <header class="topbar">
+    <div>
+      <h1 class="page-title">My Library</h1>
+      <p class="subtitle">Explore and manage your collection</p>
+    </div>
 
-<form action="/books" method="get">
-  <input type="text"
-         name="author"
-         th:value="${author}"
-         placeholder="Search by author">
+    <div class="topbar-right">
+      <div class="user-badge">
+        Signed in as
+        <strong sec:authentication="name"></strong>
+      </div>
 
-  <button type="submit">Search</button>
-  <a href="/books">Show All</a>
-</form>
-<h2>Add a new book</h2>
+      <a sec:authorize="hasRole('ADMIN')"
+         th:href="@{/admin}"
+         class="btn btn-secondary">
+        Admin Panel
+      </a>
 
-<form action="/books" method="post">
-  <input type="text" name="title"
-         placeholder="Book title" required>
+      <form th:action="@{/logout}" method="post">
+        <button type="submit" class="btn btn-danger">
+          Logout
+        </button>
+      </form>
+    </div>
+  </header>
 
-  <input type="text" name="author"
-         placeholder="Author" required>
+  <div th:if="${message}"
+       class="alert success"
+       th:text="${message}">
+  </div>
 
-  <input type="number" name="year"
-         placeholder="Year" required>
+  <section class="card">
+    <div class="card-header">
+      <h2>Search Books</h2>
+    </div>
 
-  <button type="submit">Add Book</button>
-</form>
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Year</th>
-  </tr>
-  </thead>
+    <form th:action="@{/books}" method="get"
+          class="inline-form">
+      <input type="text"
+             name="author"
+             th:value="${author}"
+             placeholder="Search by author">
 
-  <tbody>
-  <tr th:each="book : ${books}">
-    <td th:text="${book.id}"></td>
-    <td th:text="${book.title}"></td>
-    <td th:text="${book.author}"></td>
-    <td th:text="${book.year}"></td>
-  </tr>
-  </tbody>
-</table>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          Search
+        </button>
+        <a th:href="@{/books}" class="btn btn-secondary">
+          Show All
+        </a>
+      </div>
+    </form>
+  </section>
+
+  <section class="card"
+           sec:authorize="hasRole('ADMIN')">
+
+    <div class="card-header">
+      <h2>Add a New Book</h2>
+    </div>
+
+    <form th:action="@{/books}" method="post"
+          class="book-form">
+
+      <input type="text" name="title"
+             placeholder="Book title" required>
+
+      <input type="text" name="author"
+             placeholder="Author" required>
+
+      <input type="number" name="year"
+             placeholder="Publication year" required>
+
+      <button type="submit" class="btn btn-primary">
+        Add Book
+      </button>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <h2>Book Catalogue</h2>
+    </div>
+
+    <div th:if="${#lists.isEmpty(books)}"
+         class="empty-state">
+      No books found.
+    </div>
+
+    <div th:unless="${#lists.isEmpty(books)}"
+         class="table-wrapper">
+
+      <table class="books-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Year</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="book : ${books}">
+          <td th:text="${book.id}"></td>
+          <td th:text="${book.title}"></td>
+          <td th:text="${book.author}"></td>
+          <td th:text="${book.year}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
 
 </body>
 </html>
