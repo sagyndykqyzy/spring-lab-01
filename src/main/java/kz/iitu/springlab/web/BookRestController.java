@@ -3,10 +3,11 @@ package kz.iitu.springlab.web;
 
 import kz.iitu.springlab.catalog.Book;
 import kz.iitu.springlab.catalog.BookService;
-
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -33,17 +34,28 @@ public class BookRestController {
     }
 
     // GET: Book by ID
+
     @GetMapping("/{id}")
-    public ResponseEntity<Book> find(@PathVariable long id) {
+    public ResponseEntity<?> find(@PathVariable long id) {
         return service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() ->
-                        ResponseEntity.notFound().build());
+                .<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElseGet(() -> {
+                    ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                            HttpStatus.NOT_FOUND,
+                            "Book with ID " + id + " was not found"
+                    );
+                    problem.setTitle("Book Not Found");
+
+                    return ResponseEntity
+                            .status(HttpStatus.NOT_FOUND)
+                            .body(problem);
+                });
     }
+
 
     // POST: Create book
     @PostMapping
-    public ResponseEntity<Book> create(@RequestBody Book book) {
+    public ResponseEntity<Book> create(@Valid @RequestBody Book book) {
         Book saved = service.create(book);
 
         return ResponseEntity
